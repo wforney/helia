@@ -1,5 +1,39 @@
 # Changelog
 
+## [2.0.0](https://github.com/wforney/helia/compare/routers-v1.1.1...routers-v2.0.0) (2024-08-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* the `libp2p` property has been removed from the `Helia` interface in `@helia/interface` - it is still present on the return type of `createHelia` from the `helia` module
+
+### Features
+
+* add @helia/http to monorepo ([#372](https://github.com/wforney/helia/issues/372)) ([76220cd](https://github.com/wforney/helia/commit/76220cd5adf45af7fa61fd0a1321de4722b744d6))
+* add static http gateway routing ([#515](https://github.com/wforney/helia/issues/515)) ([2d070b9](https://github.com/wforney/helia/commit/2d070b9cfe0e225e4a66be85cceac900516a8a1f))
+
+
+### Bug Fixes
+
+* http blockbroker loads gateways from routing ([#519](https://github.com/wforney/helia/issues/519)) ([6a62d1c](https://github.com/wforney/helia/commit/6a62d1c8dcfadead0498d0bb59958837dc204c91))
+* update ipns module to v9 and fix double verification of records ([#396](https://github.com/wforney/helia/issues/396)) ([f2853f8](https://github.com/wforney/helia/commit/f2853f8bd5bdcee8ab7a685355b0be47f29620e0))
+* update project deps and docs ([77e34fc](https://github.com/wforney/helia/commit/77e34fc115cbfb82585fd954bcf389ecebf655bc))
+
+
+### Documentation
+
+* fix grammar - it's -&gt; its ([#565](https://github.com/wforney/helia/issues/565)) ([155e24d](https://github.com/wforney/helia/commit/155e24db8c06c33972895d702a656e0c2996f3d9))
+
+
+### Dependencies
+
+* bump aegir from 42.2.11 to 43.0.1 ([#552](https://github.com/wforney/helia/issues/552)) ([74ccc92](https://github.com/wforney/helia/commit/74ccc92793a6d0bb4bee714d9fe4fa4183aa4ee8))
+* bump aegir from 43.0.3 to 44.0.1 ([#569](https://github.com/wforney/helia/issues/569)) ([6952f05](https://github.com/wforney/helia/commit/6952f05357844e5aa3dffb2afaf261df06b9b7c1))
+* update libp2p patch versions ([917a1bc](https://github.com/wforney/helia/commit/917a1bceb9e9b56428a15dc3377a963f06affd12))
+* The following workspace dependencies were updated
+  * dependencies
+    * @helia/interface bumped from ^4.3.1 to ^5.0.0
+
 ## [1.1.1](https://github.com/ipfs/helia/compare/routers-v1.1.0...routers-v1.1.1) (2024-07-31)
 
 
