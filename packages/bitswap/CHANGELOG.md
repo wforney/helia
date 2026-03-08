@@ -1,5 +1,69 @@
 # Changelog
 
+## [4.0.0](https://github.com/wforney/helia/compare/bitswap-v3.1.3...bitswap-v4.0.0) (2026-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* uses libp2p v3 and updated block/data stores
+* helia now uses libp2p@2.x.x
+
+### Features
+
+* add @helia/bitswap with sessions ([#409](https://github.com/wforney/helia/issues/409)) ([e582c63](https://github.com/wforney/helia/commit/e582c63ca296c789312f5fcf5e3e18f267f74c03))
+* add block received event ([#837](https://github.com/wforney/helia/issues/837)) ([7d471a0](https://github.com/wforney/helia/commit/7d471a027606254f4fb4e1b73d62b8646426237d))
+* add metrics property to helia interface ([#512](https://github.com/wforney/helia/issues/512)) ([f7f71bb](https://github.com/wforney/helia/commit/f7f71bb20ab0b4efbe802be5af1189e76153b826))
+* allow adding peers to session ([#950](https://github.com/wforney/helia/issues/950)) ([33e4681](https://github.com/wforney/helia/commit/33e4681394539d4298a028d2d9ff48a14f76a8e3))
+* pass initial providers to session ([#777](https://github.com/wforney/helia/issues/777)) ([3d77369](https://github.com/wforney/helia/commit/3d773698389deb70e1a0181eb81fb8b5992857b8))
+* update to libp2p@v3 and latest data/block stores ([#856](https://github.com/wforney/helia/issues/856)) ([34d3ecd](https://github.com/wforney/helia/commit/34d3ecd76c8424387c57221000e226f08ccd1d1e))
+
+
+### Bug Fixes
+
+* add doc-check script and export types used by functions ([#637](https://github.com/wforney/helia/issues/637)) ([4f14996](https://github.com/wforney/helia/commit/4f14996a9b976f2b60f4c8fe52a4fd1632420749))
+* add name to block brokers ([#949](https://github.com/wforney/helia/issues/949)) ([0456c42](https://github.com/wforney/helia/commit/0456c42dbd92d94633c133d4f5fe35264a6bbb80))
+* add provider events to bitswap and trustless gateways ([#888](https://github.com/wforney/helia/issues/888)) ([95d95da](https://github.com/wforney/helia/commit/95d95dad7ff2a1e462b5a8a4f57ac40c4503f4ef))
+* allow truncated hashes ([#903](https://github.com/wforney/helia/issues/903)) ([c3d41c1](https://github.com/wforney/helia/commit/c3d41c1f9584c87fbebc88bc6f106e93b8444698))
+* define max bitswap message sizes ([#510](https://github.com/wforney/helia/issues/510)) ([58d7ddf](https://github.com/wforney/helia/commit/58d7ddf19cd965a8a5cc1d8148fa073a6b44d8ae))
+* do not send blocks repeatedly ([#966](https://github.com/wforney/helia/issues/966)) ([92480ee](https://github.com/wforney/helia/commit/92480ee8b81ceaff212ed198b84c1ec0460ad86c))
+* emit provider event for initial providers ([#953](https://github.com/wforney/helia/issues/953)) ([f058fba](https://github.com/wforney/helia/commit/f058fba8a06f8afdd3558bdf7c3801381648ffec))
+* emit provider event for initial provides ([f058fba](https://github.com/wforney/helia/commit/f058fba8a06f8afdd3558bdf7c3801381648ffec))
+* enforce maximum identity hash size ([#865](https://github.com/wforney/helia/issues/865)) ([d9051cd](https://github.com/wforney/helia/commit/d9051cdc2fd19ab7def32d195b5798b27d85a078)), closes [#846](https://github.com/wforney/helia/issues/846)
+* enforce maximum peer wantlist size ([#970](https://github.com/wforney/helia/issues/970)) ([eaeb734](https://github.com/wforney/helia/commit/eaeb734da7f48aef3d4086d731587d9f2a185ffb))
+* improve bitswap message merging ([#522](https://github.com/wforney/helia/issues/522)) ([7419dfc](https://github.com/wforney/helia/commit/7419dfc2fe273d3f816d27b62062636be0964d7a))
+* improve sessions implementation ([#495](https://github.com/wforney/helia/issues/495)) ([9ea934e](https://github.com/wforney/helia/commit/9ea934ed7208e87c28bc65e9090bdedf66ceeffd))
+* increase default listers on abort signals ([#484](https://github.com/wforney/helia/issues/484)) ([7cd012a](https://github.com/wforney/helia/commit/7cd012aa2ba568845d49d63a71806d20f6ac678f))
+* lower do not resend window ([#969](https://github.com/wforney/helia/issues/969)) ([b3783c0](https://github.com/wforney/helia/commit/b3783c0d4c28113989600482474f883b72db8af1))
+* remove @libp2p/interfaces dep ([#591](https://github.com/wforney/helia/issues/591)) ([e567717](https://github.com/wforney/helia/commit/e567717102464a925f87cb10fc05808a50be960e))
+* remove wants from wantlist when multiple block retrievers are used ([#491](https://github.com/wforney/helia/issues/491)) ([b1c761d](https://github.com/wforney/helia/commit/b1c761db6db7a7aca3044263fdd5e8967204deeb))
+* split bitswap messages ([#507](https://github.com/wforney/helia/issues/507)) ([59de059](https://github.com/wforney/helia/commit/59de0599367c828998069ac37dc93e10ddb565a1))
+* update deps and fix types ([#572](https://github.com/wforney/helia/issues/572)) ([f16c9ea](https://github.com/wforney/helia/commit/f16c9eac32677333313c433eb918b705439c0819))
+* update log formatting to print errors correctly ([#884](https://github.com/wforney/helia/issues/884)) ([f35ecd1](https://github.com/wforney/helia/commit/f35ecd1c8ad3c712d3882d0f0f2abaf0f0296ec1))
+* update to libp2p@2.x.x ([#630](https://github.com/wforney/helia/issues/630)) ([ec8bf66](https://github.com/wforney/helia/commit/ec8bf66dd870b42d6e5ef2b41706102397e0d39a))
+* use libp2p provider routing field ([#889](https://github.com/wforney/helia/issues/889)) ([d4d97b8](https://github.com/wforney/helia/commit/d4d97b83f76be7e3b480052467408839f808e230))
+
+
+### Documentation
+
+* add spell checker to ci ([#743](https://github.com/wforney/helia/issues/743)) ([45ca6bc](https://github.com/wforney/helia/commit/45ca6bc70b1644028500101044595fa0e2199b07))
+* fix grammar - it's -&gt; its ([#565](https://github.com/wforney/helia/issues/565)) ([155e24d](https://github.com/wforney/helia/commit/155e24db8c06c33972895d702a656e0c2996f3d9))
+
+
+### Dependencies
+
+* bump aegir from 42.2.11 to 43.0.1 ([#552](https://github.com/wforney/helia/issues/552)) ([74ccc92](https://github.com/wforney/helia/commit/74ccc92793a6d0bb4bee714d9fe4fa4183aa4ee8))
+* bump aegir from 43.0.3 to 44.0.1 ([#569](https://github.com/wforney/helia/issues/569)) ([6952f05](https://github.com/wforney/helia/commit/6952f05357844e5aa3dffb2afaf261df06b9b7c1))
+* bump aegir from 44.1.4 to 45.0.1 ([#669](https://github.com/wforney/helia/issues/669)) ([e58e49c](https://github.com/wforney/helia/commit/e58e49c6aed8ea9d1e9851435a25e33fdbee3781))
+* bump it-length-prefixed from 9.1.1 to 10.0.1 ([#740](https://github.com/wforney/helia/issues/740)) ([ac7185a](https://github.com/wforney/helia/commit/ac7185af8f0da0782f6273fba76ccfe9427d2fa4))
+* **dev:** bump sinon from 17.0.2 to 18.0.0 ([#536](https://github.com/wforney/helia/issues/536)) ([62f77df](https://github.com/wforney/helia/commit/62f77dfbff94a64e9c248f5be54055c18a6427f7))
+* **dev:** bump sinon from 18.0.1 to 19.0.2 ([#634](https://github.com/wforney/helia/issues/634)) ([23e62e1](https://github.com/wforney/helia/commit/23e62e16b8962bfe982a1bbb157a144382ca7099))
+* update aegir to 47.x.x ([#804](https://github.com/wforney/helia/issues/804)) ([60fbbc2](https://github.com/wforney/helia/commit/60fbbc2eb08e023e2eac02ae0e89ed143d715084))
+* update all deps ([#792](https://github.com/wforney/helia/issues/792)) ([d43efc7](https://github.com/wforney/helia/commit/d43efc7bdfff34071a8e4e22e01f659fbac0b78e))
+* The following workspace dependencies were updated
+  * dependencies
+    * @helia/interface bumped from ^6.1.1 to ^7.0.0
+    * @helia/utils bumped from ^2.4.2 to ^3.0.0
+
 ## [3.1.3](https://github.com/ipfs/helia/compare/bitswap-v3.1.2...bitswap-v3.1.3) (2026-03-06)
 
 

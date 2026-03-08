@@ -1,5 +1,93 @@
 # Changelog
 
+## [10.0.0](https://github.com/wforney/helia/compare/ipns-v9.1.9...ipns-v10.0.0) (2026-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* `ipns.publish` now accepts key name strings rather than private keys Names previously publishing using an user controlled private key, will need to be explicitly published again by first importing the key into the keychain (`await libp2p.keychain.importKey('my-key', key)` and then published with `ipns.publish('my-key', ...)`.
+* uses libp2p v3 and updated block/data stores
+* helia now uses libp2p@2.x.x
+* requires @helia/interface@4.1.x or later, `resolveDns` has been renamed `resolveDNSLink`
+* to support paths in `@helia/ipns`, the return type of `ipns.resolve` is now `{ path: string, cid: CID }` instead of just `CID`
+* remove gossipsub from default libp2p services ([#401](https://github.com/wforney/helia/issues/401))
+* `helia.routing` is the default routing used, the `libp2p` routing has been removed as it is redundant
+* the `libp2p` property has been removed from the `Helia` interface in `@helia/interface` - it is still present on the return type of `createHelia` from the `helia` module
+* uses multiformats v13 and helia v3, renames `dht` routing to `libp2p`
+* alters the options object passed to the `ipns` factory function
+* the `IPNSRecord` type returned from the `publish` method has changed
+
+### Features
+
+* add @helia/http to monorepo ([#372](https://github.com/wforney/helia/issues/372)) ([76220cd](https://github.com/wforney/helia/commit/76220cd5adf45af7fa61fd0a1321de4722b744d6))
+* add `record`/`answer` fields to IPNS results ([#471](https://github.com/wforney/helia/issues/471)) ([b6765fe](https://github.com/wforney/helia/commit/b6765fe7632231407c4a8506015ac07e30152190))
+* add cache control to IPNS ([#473](https://github.com/wforney/helia/issues/473)) ([b00f682](https://github.com/wforney/helia/commit/b00f682647d3687e54bd48f8f68ab79d1e4e96cc))
+* add ipns reproviding/republishing ([#764](https://github.com/wforney/helia/issues/764)) ([008747b](https://github.com/wforney/helia/commit/008747b59a03682e1b6f648a39635e1b1971e481))
+* add ipns resolver ([#868](https://github.com/wforney/helia/issues/868)) ([4d51f16](https://github.com/wforney/helia/commit/4d51f16de47c80df2fbfa4932825153ce5330100))
+* add republish signed ipns records ([#745](https://github.com/wforney/helia/issues/745)) ([91880b0](https://github.com/wforney/helia/commit/91880b076fbfa24e5354fb6cda8a556a807f17cc))
+* allow passing custom ttl when publishing ipns ([#723](https://github.com/wforney/helia/issues/723)) ([12df657](https://github.com/wforney/helia/commit/12df657aa421c86df53bc54becf1d505b1c145ce))
+* resolve IPNS records with PeerId and CID keys ([#861](https://github.com/wforney/helia/issues/861)) ([b81ec52](https://github.com/wforney/helia/commit/b81ec52026bee611f859c896da7d4234bac486a2)), closes [#801](https://github.com/wforney/helia/issues/801)
+* support DNS over HTTPS and DNS-JSON over HTTPS ([#55](https://github.com/wforney/helia/issues/55)) ([2ac0e8b](https://github.com/wforney/helia/commit/2ac0e8b26556b73961e67191c564ac2b18d32b31))
+* support paths in @helia/ipns ([#410](https://github.com/wforney/helia/issues/410)) ([ca8d5eb](https://github.com/wforney/helia/commit/ca8d5ebdf587574c7fb84517b558226c3479caa9))
+* update helia to v3 and multiformats to v13 ([#167](https://github.com/wforney/helia/issues/167)) ([a0381b9](https://github.com/wforney/helia/commit/a0381b95051bbf3edfa4f53e0ae2d5f43c1e4382))
+* update to libp2p@v3 and latest data/block stores ([#856](https://github.com/wforney/helia/issues/856)) ([34d3ecd](https://github.com/wforney/helia/commit/34d3ecd76c8424387c57221000e226f08ccd1d1e))
+* use custom DNS resolver in @helia/ipns for DNSLink ([#466](https://github.com/wforney/helia/issues/466)) ([2c71b6e](https://github.com/wforney/helia/commit/2c71b6ec8d34dcc722a3914702f67603492c335f)), closes [#369](https://github.com/wforney/helia/issues/369)
+* use helia router for IPNS put/get ([#387](https://github.com/wforney/helia/issues/387)) ([ce74026](https://github.com/wforney/helia/commit/ce740268e83f50e6f144b74969a98d54005cd852))
+
+
+### Bug Fixes
+
+* add doc-check script and export types used by functions ([#637](https://github.com/wforney/helia/issues/637)) ([4f14996](https://github.com/wforney/helia/commit/4f14996a9b976f2b60f4c8fe52a4fd1632420749))
+* add sideEffects: false to package.json ([#485](https://github.com/wforney/helia/issues/485)) ([8c45267](https://github.com/wforney/helia/commit/8c45267a474ab10b2faadfebdab33cfe446e8c03))
+* align implicit default ttl with specs ([#749](https://github.com/wforney/helia/issues/749)) ([375796a](https://github.com/wforney/helia/commit/375796aaead36111c4d663b061bf0edfe01c62ca))
+* export IPNSRoutingEvents ([#407](https://github.com/wforney/helia/issues/407)) ([44f4e88](https://github.com/wforney/helia/commit/44f4e88030a21d86b2a8473d3d00efb624cfce8f))
+* flaky test to publish an IPNS record  ([#810](https://github.com/wforney/helia/issues/810)) ([28a7091](https://github.com/wforney/helia/commit/28a7091260fda1f711b93318084a65ff3d2f3f8a))
+* handle /ipns/ prefixed keys in republishRecord ([#763](https://github.com/wforney/helia/issues/763)) ([e6339ed](https://github.com/wforney/helia/commit/e6339ed3cf86f7d56d1aa098de5e091b322e654e))
+* handle dnslink pointing to CID with peer id (ipns name) ([#722](https://github.com/wforney/helia/issues/722)) ([2666d64](https://github.com/wforney/helia/commit/2666d643d8bd90db077095f20edb1924c8594185))
+* improve error reporting ([#896](https://github.com/wforney/helia/issues/896)) ([71f9c4e](https://github.com/wforney/helia/commit/71f9c4ef2c8557d92e5769675a69da2679c8b7d2))
+* make @libp2p/interface a dependency ([#159](https://github.com/wforney/helia/issues/159)) ([546ecf0](https://github.com/wforney/helia/commit/546ecf023bd619d32e187fa6a55d39fcf12e4bbe)), closes [#158](https://github.com/wforney/helia/issues/158)
+* propagate ipns failures ([#789](https://github.com/wforney/helia/issues/789)) ([cd1eb58](https://github.com/wforney/helia/commit/cd1eb588998ddb1eb17894230cde4a68f9455398))
+* remove gossipsub from default libp2p services ([#401](https://github.com/wforney/helia/issues/401)) ([99c94f4](https://github.com/wforney/helia/commit/99c94f4b85c4ed826a6195207e3545cbbc87a6d1))
+* remove is-ipfs from @helia/ipns dependencies ([#421](https://github.com/wforney/helia/issues/421)) ([3851fe2](https://github.com/wforney/helia/commit/3851fe2df6af337b7e2cabe694bd3dba17748fce))
+* respect the IPNS TTL field ([#482](https://github.com/wforney/helia/issues/482)) ([1561e4a](https://github.com/wforney/helia/commit/1561e4a106074b94e421a77b0b8776b065e48bc5))
+* throw specific error when IPNS lookup fails ([#919](https://github.com/wforney/helia/issues/919)) ([574ac5e](https://github.com/wforney/helia/commit/574ac5e4405ba904d223c740e07e9ac21394cb9b))
+* update ipns module to v9 and fix double verification of records ([#396](https://github.com/wforney/helia/issues/396)) ([f2853f8](https://github.com/wforney/helia/commit/f2853f8bd5bdcee8ab7a685355b0be47f29620e0))
+* update libp2p interfaces ([#109](https://github.com/wforney/helia/issues/109)) ([514b6e1](https://github.com/wforney/helia/commit/514b6e1e4192f700a6f0e769d52a4ec5dfe757ec))
+* update log formatting to print errors correctly ([#884](https://github.com/wforney/helia/issues/884)) ([f35ecd1](https://github.com/wforney/helia/commit/f35ecd1c8ad3c712d3882d0f0f2abaf0f0296ec1))
+* update project deps and docs ([77e34fc](https://github.com/wforney/helia/commit/77e34fc115cbfb82585fd954bcf389ecebf655bc))
+* update to libp2p@2.x.x ([#630](https://github.com/wforney/helia/issues/630)) ([ec8bf66](https://github.com/wforney/helia/commit/ec8bf66dd870b42d6e5ef2b41706102397e0d39a))
+* use libp2p provider routing field ([#889](https://github.com/wforney/helia/issues/889)) ([d4d97b8](https://github.com/wforney/helia/commit/d4d97b83f76be7e3b480052467408839f808e230))
+* use non-deprecated factory function to create delegated client ([#934](https://github.com/wforney/helia/issues/934)) ([20ba9cf](https://github.com/wforney/helia/commit/20ba9cf6256961d2b664af0e8f48b5e9d009d834))
+
+
+### Documentation
+
+* add spell checker to ci ([#743](https://github.com/wforney/helia/issues/743)) ([45ca6bc](https://github.com/wforney/helia/commit/45ca6bc70b1644028500101044595fa0e2199b07))
+* fix grammar - it's -&gt; its ([#565](https://github.com/wforney/helia/issues/565)) ([155e24d](https://github.com/wforney/helia/commit/155e24db8c06c33972895d702a656e0c2996f3d9))
+* fix typo ([#113](https://github.com/wforney/helia/issues/113)) ([d732db9](https://github.com/wforney/helia/commit/d732db9f4fea23aa11456d451f02d4f143846ba3))
+
+
+### Dependencies
+
+* bump @libp2p/logger from 2.1.1 to 3.0.2 ([#87](https://github.com/wforney/helia/issues/87)) ([b2886b9](https://github.com/wforney/helia/commit/b2886b9598a66a31c69ee0c3c7e13748614be37e))
+* bump aegir from 42.2.11 to 43.0.1 ([#552](https://github.com/wforney/helia/issues/552)) ([74ccc92](https://github.com/wforney/helia/commit/74ccc92793a6d0bb4bee714d9fe4fa4183aa4ee8))
+* bump aegir from 43.0.3 to 44.0.1 ([#569](https://github.com/wforney/helia/issues/569)) ([6952f05](https://github.com/wforney/helia/commit/6952f05357844e5aa3dffb2afaf261df06b9b7c1))
+* bump aegir from 44.1.4 to 45.0.1 ([#669](https://github.com/wforney/helia/issues/669)) ([e58e49c](https://github.com/wforney/helia/commit/e58e49c6aed8ea9d1e9851435a25e33fdbee3781))
+* **dev:** bump aegir from 40.0.13 to 41.0.0 ([#107](https://github.com/wforney/helia/issues/107)) ([5402d30](https://github.com/wforney/helia/commit/5402d30de1437052e9e9b955d9be3c2898515447))
+* **dev:** bump libp2p from 0.45.9 to 0.46.6 ([#92](https://github.com/wforney/helia/issues/92)) ([efe02e5](https://github.com/wforney/helia/commit/efe02e5b38992189edb40cd34d79e76dca4c34a3))
+* **dev:** bump sinon from 15.2.0 to 16.0.0 ([#105](https://github.com/wforney/helia/issues/105)) ([231ebbd](https://github.com/wforney/helia/commit/231ebbd4cda2196d7914a81aa1b0d79473c3a325))
+* **dev:** bump sinon from 16.1.3 to 17.0.0 ([#108](https://github.com/wforney/helia/issues/108)) ([530aeff](https://github.com/wforney/helia/commit/530aeff8af103c9126411cc1b035ee106f113f1f))
+* **dev:** bump sinon from 17.0.2 to 18.0.0 ([#536](https://github.com/wforney/helia/issues/536)) ([62f77df](https://github.com/wforney/helia/commit/62f77dfbff94a64e9c248f5be54055c18a6427f7))
+* **dev:** bump sinon from 18.0.1 to 19.0.2 ([#634](https://github.com/wforney/helia/issues/634)) ([23e62e1](https://github.com/wforney/helia/commit/23e62e16b8962bfe982a1bbb157a144382ca7099))
+* update aegir to 47.x.x ([#804](https://github.com/wforney/helia/issues/804)) ([60fbbc2](https://github.com/wforney/helia/commit/60fbbc2eb08e023e2eac02ae0e89ed143d715084))
+* update all deps ([#792](https://github.com/wforney/helia/issues/792)) ([d43efc7](https://github.com/wforney/helia/commit/d43efc7bdfff34071a8e4e22e01f659fbac0b78e))
+* update ipns to v7.x.x ([#106](https://github.com/wforney/helia/issues/106)) ([83a1d14](https://github.com/wforney/helia/commit/83a1d147e8ba758efd7d2574ea486218bd1f3df2))
+* update kad-dht to 14.0.0 ([#648](https://github.com/wforney/helia/issues/648)) ([60d8c8a](https://github.com/wforney/helia/commit/60d8c8a9ff2104302d1c87bcf39258f1da33cd45))
+* update libp2p patch versions ([917a1bc](https://github.com/wforney/helia/commit/917a1bceb9e9b56428a15dc3377a963f06affd12))
+* The following workspace dependencies were updated
+  * dependencies
+    * @helia/interface bumped from ^6.1.1 to ^7.0.0
+
 ## [9.1.9](https://github.com/ipfs/helia/compare/ipns-v9.1.8...ipns-v9.1.9) (2026-02-05)
 
 
