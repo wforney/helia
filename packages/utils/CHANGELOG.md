@@ -1,5 +1,96 @@
 # Changelog
 
+## [3.0.0](https://github.com/wforney/helia/compare/utils-v2.4.2...utils-v3.0.0) (2026-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* `ipns.publish` now accepts key name strings rather than private keys Names previously publishing using an user controlled private key, will need to be explicitly published again by first importing the key into the keychain (`await libp2p.keychain.importKey('my-key', key)` and then published with `ipns.publish('my-key', ...)`.
+* uses libp2p v3 and updated block/data stores
+* the `.dagWalkers` property has been removed
+* helia now uses libp2p@2.x.x
+
+### Features
+
+* add block session support to @helia/interface ([#398](https://github.com/wforney/helia/issues/398)) ([5cf216b](https://github.com/wforney/helia/commit/5cf216baa6806cd82f8fcddd1f024ef6a506f667))
+* add cancelReprovide function to routing ([#672](https://github.com/wforney/helia/issues/672)) ([dc13525](https://github.com/wforney/helia/commit/dc1352563ab5ed7b204ae702c1e48035d196a470))
+* add depth and breadth-first graph walkers to utils package ([#871](https://github.com/wforney/helia/issues/871)) ([25eca46](https://github.com/wforney/helia/commit/25eca4698b353e67fc7e5ea70ade3d247bd71a59))
+* add ipns reproviding/republishing ([#764](https://github.com/wforney/helia/issues/764)) ([008747b](https://github.com/wforney/helia/commit/008747b59a03682e1b6f648a39635e1b1971e481))
+* add libp2p to @helia/http ([#826](https://github.com/wforney/helia/issues/826)) ([235e5c4](https://github.com/wforney/helia/commit/235e5c4093a51bda1e0331f9dd26754f601b582c))
+* add method tracing to routing ([#715](https://github.com/wforney/helia/issues/715)) ([5784ceb](https://github.com/wforney/helia/commit/5784cebb3225157d6220668d4f58481f046debf2))
+* add metrics property to helia interface ([#512](https://github.com/wforney/helia/issues/512)) ([f7f71bb](https://github.com/wforney/helia/commit/f7f71bb20ab0b4efbe802be5af1189e76153b826))
+* allow adding peers to session ([#950](https://github.com/wforney/helia/issues/950)) ([33e4681](https://github.com/wforney/helia/commit/33e4681394539d4298a028d2d9ff48a14f76a8e3))
+* allow filtering children ([#880](https://github.com/wforney/helia/issues/880)) ([3eb6f3a](https://github.com/wforney/helia/commit/3eb6f3a78f3dfe151ecc425290a06c92fa1431b7))
+* allow specifying graph export strategy ([#907](https://github.com/wforney/helia/issues/907)) ([7676912](https://github.com/wforney/helia/commit/7676912ec08b7599309e3a6afdd4183f8dc61b27))
+* allow updating pin metadata ([#647](https://github.com/wforney/helia/issues/647)) ([bc64f47](https://github.com/wforney/helia/commit/bc64f47897691295435568beee61383116b0032b))
+* expose .dns property on @helia/interface ([#465](https://github.com/wforney/helia/issues/465)) ([8c9bb7d](https://github.com/wforney/helia/commit/8c9bb7d224a1b786cba1fba18bffe07001a3b95d))
+* pass initial providers to session ([#777](https://github.com/wforney/helia/issues/777)) ([3d77369](https://github.com/wforney/helia/commit/3d773698389deb70e1a0181eb81fb8b5992857b8))
+* update to libp2p@v3 and latest data/block stores ([#856](https://github.com/wforney/helia/issues/856)) ([34d3ecd](https://github.com/wforney/helia/commit/34d3ecd76c8424387c57221000e226f08ccd1d1e))
+
+
+### Bug Fixes
+
+* add doc-check script and export types used by functions ([#637](https://github.com/wforney/helia/issues/637)) ([4f14996](https://github.com/wforney/helia/commit/4f14996a9b976f2b60f4c8fe52a4fd1632420749))
+* add missing log prefix colon for helia:session-storage ([#544](https://github.com/wforney/helia/issues/544)) ([011fa92](https://github.com/wforney/helia/commit/011fa92c05bf42fb20666b1df4c86fb47889a07e))
+* add name to block brokers ([#949](https://github.com/wforney/helia/issues/949)) ([0456c42](https://github.com/wforney/helia/commit/0456c42dbd92d94633c133d4f5fe35264a6bbb80))
+* add provider events to bitswap and trustless gateways ([#888](https://github.com/wforney/helia/issues/888)) ([95d95da](https://github.com/wforney/helia/commit/95d95dad7ff2a1e462b5a8a4f57ac40c4503f4ef))
+* add sideEffects: false to package.json ([#485](https://github.com/wforney/helia/issues/485)) ([8c45267](https://github.com/wforney/helia/commit/8c45267a474ab10b2faadfebdab33cfe446e8c03))
+* allow configuring cid peer filter size ([#955](https://github.com/wforney/helia/issues/955)) ([e16b7a7](https://github.com/wforney/helia/commit/e16b7a7dcd013f13321dea162eee0130473541ea))
+* allow routings to use helia components ([#900](https://github.com/wforney/helia/issues/900)) ([cc90a4d](https://github.com/wforney/helia/commit/cc90a4db91a44c0fedc2cb8a49da9b3349418815))
+* allow truncated hashes ([#903](https://github.com/wforney/helia/issues/903)) ([c3d41c1](https://github.com/wforney/helia/commit/c3d41c1f9584c87fbebc88bc6f106e93b8444698))
+* blockstore operations should throw when passed an aborted signal ([#497](https://github.com/wforney/helia/issues/497)) ([9a10498](https://github.com/wforney/helia/commit/9a10498e55b4380191135535f7f607082e9c00c6))
+* cancel in-flight block requests when racing brokers ([#490](https://github.com/wforney/helia/issues/490)) ([395cd9e](https://github.com/wforney/helia/commit/395cd9e6ac2f829ef47b503cc7a6c77922f484cf))
+* check eviction filter for new providers ([#542](https://github.com/wforney/helia/issues/542)) ([f46700f](https://github.com/wforney/helia/commit/f46700fd871d5419e75ecfb0b00fb01aedbe84c7)), closes [#501](https://github.com/wforney/helia/issues/501)
+* consolidate graph walkers ([#878](https://github.com/wforney/helia/issues/878)) ([760ed27](https://github.com/wforney/helia/commit/760ed27fea5e873e7b402773652961ab4583e2ac))
+* do not append peer ids to provider multiaddrs ([#516](https://github.com/wforney/helia/issues/516)) ([e4e67d0](https://github.com/wforney/helia/commit/e4e67d0cc64593eca8c3eaa67a4e27544a1692ee))
+* emit provider event for initial providers ([#953](https://github.com/wforney/helia/issues/953)) ([f058fba](https://github.com/wforney/helia/commit/f058fba8a06f8afdd3558bdf7c3801381648ffec))
+* emit provider event for initial provides ([f058fba](https://github.com/wforney/helia/commit/f058fba8a06f8afdd3558bdf7c3801381648ffec))
+* end peer lookup queue when routers finish ([#915](https://github.com/wforney/helia/issues/915)) ([b2257d4](https://github.com/wforney/helia/commit/b2257d4fe6cf6cc524733340b380e3f5c773183f))
+* enforce maximum identity hash size ([#865](https://github.com/wforney/helia/issues/865)) ([d9051cd](https://github.com/wforney/helia/commit/d9051cdc2fd19ab7def32d195b5798b27d85a078)), closes [#846](https://github.com/wforney/helia/issues/846)
+* improve error reporting ([#896](https://github.com/wforney/helia/issues/896)) ([71f9c4e](https://github.com/wforney/helia/commit/71f9c4ef2c8557d92e5769675a69da2679c8b7d2))
+* improve sessions implementation ([#495](https://github.com/wforney/helia/issues/495)) ([9ea934e](https://github.com/wforney/helia/commit/9ea934ed7208e87c28bc65e9090bdedf66ceeffd))
+* increase default listers on abort signals ([#484](https://github.com/wforney/helia/issues/484)) ([7cd012a](https://github.com/wforney/helia/commit/7cd012aa2ba568845d49d63a71806d20f6ac678f))
+* listen for signal abort during session creation ([#874](https://github.com/wforney/helia/issues/874)) ([faac4ad](https://github.com/wforney/helia/commit/faac4ad3650f7e6e53cba2195067efd4b8c7070a))
+* log peer id as string not object ([#514](https://github.com/wforney/helia/issues/514)) ([f6bcbd4](https://github.com/wforney/helia/commit/f6bcbd4e784a0c7a230f8c5ccb7889850d692af4))
+* reject blockstore session get promise when signal fires  ([#776](https://github.com/wforney/helia/issues/776)) ([d883eaf](https://github.com/wforney/helia/commit/d883eafbdcd981a0cc7c78cf361bb72324a8cbdc))
+* remove block request promise when initial provider search fails ([#886](https://github.com/wforney/helia/issues/886)) ([bfc8710](https://github.com/wforney/helia/commit/bfc871013eb2b4b1e9c62a0055002605eccb375b))
+* remove redundant filter ([#663](https://github.com/wforney/helia/issues/663)) ([efc47fa](https://github.com/wforney/helia/commit/efc47fa081107d31a8985ed72b36a244385b55ca))
+* replace dag walkers with generic CID extraction from blocks ([#447](https://github.com/wforney/helia/issues/447)) ([5ff6998](https://github.com/wforney/helia/commit/5ff6998e6bc8b04e3407bc98c1924c55f632d9b7))
+* support reading identity cids ([#429](https://github.com/wforney/helia/issues/429)) ([98308f7](https://github.com/wforney/helia/commit/98308f77488b8196b2d18f78f05ecd2d37456834))
+* throw a specific error when offline and a block is missing ([#917](https://github.com/wforney/helia/issues/917)) ([e27aa2d](https://github.com/wforney/helia/commit/e27aa2de96fef39950f4c7d00a517208372aaf4e))
+* type error ([#537](https://github.com/wforney/helia/issues/537)) ([e6b976a](https://github.com/wforney/helia/commit/e6b976a4df96b27bf3aa239356d2e991801da28c))
+* unhandled promise rejection during inital peer search ([#922](https://github.com/wforney/helia/issues/922)) ([cb05f46](https://github.com/wforney/helia/commit/cb05f4676a14ee719a8e1ac31ae35f9683d5250b))
+* update deps and fix types ([#572](https://github.com/wforney/helia/issues/572)) ([f16c9ea](https://github.com/wforney/helia/commit/f16c9eac32677333313c433eb918b705439c0819))
+* update libp2p deps, send user agent with auto-tls ([#736](https://github.com/wforney/helia/issues/736)) ([c015793](https://github.com/wforney/helia/commit/c01579393ddd622352d0d0179c67adaf5ccc4c8f))
+* update log formatting to print errors correctly ([#884](https://github.com/wforney/helia/issues/884)) ([f35ecd1](https://github.com/wforney/helia/commit/f35ecd1c8ad3c712d3882d0f0f2abaf0f0296ec1))
+* update project deps and docs ([77e34fc](https://github.com/wforney/helia/commit/77e34fc115cbfb82585fd954bcf389ecebf655bc))
+* update to libp2p@2.x.x ([#630](https://github.com/wforney/helia/issues/630)) ([ec8bf66](https://github.com/wforney/helia/commit/ec8bf66dd870b42d6e5ef2b41706102397e0d39a))
+* use hasCode from multiformats ([#635](https://github.com/wforney/helia/issues/635)) ([f5a03fc](https://github.com/wforney/helia/commit/f5a03fc28d0cd59841b842306f912c092aeabd5f))
+* use libp2p provider routing field ([#889](https://github.com/wforney/helia/issues/889)) ([d4d97b8](https://github.com/wforney/helia/commit/d4d97b83f76be7e3b480052467408839f808e230))
+* use non-deprecated factory function to create delegated client ([#934](https://github.com/wforney/helia/issues/934)) ([20ba9cf](https://github.com/wforney/helia/commit/20ba9cf6256961d2b664af0e8f48b5e9d009d834))
+* wrap blockstore in identity blockstore ([#493](https://github.com/wforney/helia/issues/493)) ([b67ac5f](https://github.com/wforney/helia/commit/b67ac5f16eca1df5534c985045250bdb334a85cf))
+
+
+### Documentation
+
+* add spell checker to ci ([#743](https://github.com/wforney/helia/issues/743)) ([45ca6bc](https://github.com/wforney/helia/commit/45ca6bc70b1644028500101044595fa0e2199b07))
+* fix grammar - it's -&gt; its ([#565](https://github.com/wforney/helia/issues/565)) ([155e24d](https://github.com/wforney/helia/commit/155e24db8c06c33972895d702a656e0c2996f3d9))
+
+
+### Dependencies
+
+* bump aegir from 42.2.11 to 43.0.1 ([#552](https://github.com/wforney/helia/issues/552)) ([74ccc92](https://github.com/wforney/helia/commit/74ccc92793a6d0bb4bee714d9fe4fa4183aa4ee8))
+* bump aegir from 43.0.3 to 44.0.1 ([#569](https://github.com/wforney/helia/issues/569)) ([6952f05](https://github.com/wforney/helia/commit/6952f05357844e5aa3dffb2afaf261df06b9b7c1))
+* bump aegir from 44.1.4 to 45.0.1 ([#669](https://github.com/wforney/helia/issues/669)) ([e58e49c](https://github.com/wforney/helia/commit/e58e49c6aed8ea9d1e9851435a25e33fdbee3781))
+* **dev:** bump sinon from 17.0.2 to 18.0.0 ([#536](https://github.com/wforney/helia/issues/536)) ([62f77df](https://github.com/wforney/helia/commit/62f77dfbff94a64e9c248f5be54055c18a6427f7))
+* **dev:** bump sinon from 18.0.1 to 19.0.2 ([#634](https://github.com/wforney/helia/issues/634)) ([23e62e1](https://github.com/wforney/helia/commit/23e62e16b8962bfe982a1bbb157a144382ca7099))
+* update aegir to 47.x.x ([#804](https://github.com/wforney/helia/issues/804)) ([60fbbc2](https://github.com/wforney/helia/commit/60fbbc2eb08e023e2eac02ae0e89ed143d715084))
+* update all deps ([#792](https://github.com/wforney/helia/issues/792)) ([d43efc7](https://github.com/wforney/helia/commit/d43efc7bdfff34071a8e4e22e01f659fbac0b78e))
+* update libp2p patch versions ([917a1bc](https://github.com/wforney/helia/commit/917a1bceb9e9b56428a15dc3377a963f06affd12))
+* The following workspace dependencies were updated
+  * dependencies
+    * @helia/interface bumped from ^6.1.1 to ^7.0.0
+
 ## [2.4.2](https://github.com/ipfs/helia/compare/utils-v2.4.1...utils-v2.4.2) (2026-02-05)
 
 

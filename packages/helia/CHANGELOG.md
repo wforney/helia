@@ -1,5 +1,216 @@
 # Changelog
 
+## [7.0.0](https://github.com/wforney/helia/compare/helia-v6.0.21...helia-v7.0.0) (2026-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* use `Helia` interface instead of `HeliaLibp2p`
+* uses libp2p v3 and updated block/data stores
+* helia now uses libp2p@2.x.x
+* remove gossipsub from default libp2p services ([#401](https://github.com/wforney/helia/issues/401))
+* the `libp2p` property has been removed from the `Helia` interface in `@helia/interface` - it is still present on the return type of `createHelia` from the `helia` module
+* `helia.pin.add` and `helia.pin.rm` now return `AsyncGenerator<CID>`
+* The libp2p API has changed in a couple of places - please see the [upgrade guide](https://github.com/libp2p/js-libp2p/blob/main/doc/migrations/v0.46-v1.0.0.md)
+
+### Features
+
+* add @helia/http to monorepo ([#372](https://github.com/wforney/helia/issues/372)) ([76220cd](https://github.com/wforney/helia/commit/76220cd5adf45af7fa61fd0a1321de4722b744d6))
+* add auto-tls support ([#716](https://github.com/wforney/helia/issues/716)) ([e45e1de](https://github.com/wforney/helia/commit/e45e1dea40120b993f009f8fbb81a9737742196c))
+* add libp2p to @helia/http ([#826](https://github.com/wforney/helia/issues/826)) ([235e5c4](https://github.com/wforney/helia/commit/235e5c4093a51bda1e0331f9dd26754f601b582c))
+* add metrics property to helia interface ([#512](https://github.com/wforney/helia/issues/512)) ([f7f71bb](https://github.com/wforney/helia/commit/f7f71bb20ab0b4efbe802be5af1189e76153b826))
+* add WebRTC-Direct listener ([#741](https://github.com/wforney/helia/issues/741)) ([deb9165](https://github.com/wforney/helia/commit/deb9165efe92ce9590c400955c073625eb358bb6))
+* configurable block brokers ([#280](https://github.com/wforney/helia/issues/280)) ([0749cbf](https://github.com/wforney/helia/commit/0749cbf99745ea6ab4363f1b5d635634ca0ddcfa))
+* enable filtering in delegated routing client ([#651](https://github.com/wforney/helia/issues/651)) ([23ebae1](https://github.com/wforney/helia/commit/23ebae1072fbbda371ee1d68efb5ecd25d6e339e))
+* export default helia config ([#783](https://github.com/wforney/helia/issues/783)) ([ae67092](https://github.com/wforney/helia/commit/ae670928a7aeb023d7f3d6aa41bcf9f23a413cdf))
+* expose .dns property on @helia/interface ([#465](https://github.com/wforney/helia/issues/465)) ([8c9bb7d](https://github.com/wforney/helia/commit/8c9bb7d224a1b786cba1fba18bffe07001a3b95d))
+* GatewayBlockBroker prioritizes & tries all gateways ([#281](https://github.com/wforney/helia/issues/281)) ([9bad21b](https://github.com/wforney/helia/commit/9bad21bd59fe6d1ba4a137db5a46bd2ead5238c3))
+* iterable pinning ([#231](https://github.com/wforney/helia/issues/231)) ([c15c774](https://github.com/wforney/helia/commit/c15c7749294d3d4aea5aef70544d088250336798))
+* update to libp2p@v3 and latest data/block stores ([#856](https://github.com/wforney/helia/issues/856)) ([34d3ecd](https://github.com/wforney/helia/commit/34d3ecd76c8424387c57221000e226f08ccd1d1e))
+* use trustless-gateway.link by default ([#299](https://github.com/wforney/helia/issues/299)) ([bf11efa](https://github.com/wforney/helia/commit/bf11efa4875f3b8f844511d70122983fc46b4f88))
+
+
+### Bug Fixes
+
+* add a test for reading the peer id from the datastore ([#397](https://github.com/wforney/helia/issues/397)) ([4836d52](https://github.com/wforney/helia/commit/4836d52bf721bc0c3e5920ebd0a05186fb19c6c6))
+* add dag walker for json codec ([#247](https://github.com/wforney/helia/issues/247)) ([5c4b570](https://github.com/wforney/helia/commit/5c4b5709e6b98de5efc9bed388942e367f5874e7)), closes [#246](https://github.com/wforney/helia/issues/246)
+* add doc-check script and export types used by functions ([#637](https://github.com/wforney/helia/issues/637)) ([4f14996](https://github.com/wforney/helia/commit/4f14996a9b976f2b60f4c8fe52a4fd1632420749))
+* add sideEffects: false to package.json ([#485](https://github.com/wforney/helia/issues/485)) ([8c45267](https://github.com/wforney/helia/commit/8c45267a474ab10b2faadfebdab33cfe446e8c03))
+* add tls to default delegated routing filters ([#670](https://github.com/wforney/helia/issues/670)) ([aecac3d](https://github.com/wforney/helia/commit/aecac3d92cbd22a7331afee8e6f87ef31a9f7d95))
+* add va1 bootstrapper ([#649](https://github.com/wforney/helia/issues/649)) ([460853f](https://github.com/wforney/helia/commit/460853f915661c794e52299529bda41a893f7b5b))
+* allow routings to use helia components ([#900](https://github.com/wforney/helia/issues/900)) ([cc90a4d](https://github.com/wforney/helia/commit/cc90a4db91a44c0fedc2cb8a49da9b3349418815))
+* create @helia/block-brokers package ([#341](https://github.com/wforney/helia/issues/341)) ([#342](https://github.com/wforney/helia/issues/342)) ([2979147](https://github.com/wforney/helia/commit/297914756fa06dc0c28890a2654d1159d16689c2))
+* enforce maximum identity hash size ([#865](https://github.com/wforney/helia/issues/865)) ([d9051cd](https://github.com/wforney/helia/commit/d9051cdc2fd19ab7def32d195b5798b27d85a078)), closes [#846](https://github.com/wforney/helia/issues/846)
+* export libp2p service return type ([#263](https://github.com/wforney/helia/issues/263)) ([76769cf](https://github.com/wforney/helia/commit/76769cf33e06746f998b4f16b52d3e2a6a7a20a8))
+* helia init should extend base helia init ([#464](https://github.com/wforney/helia/issues/464)) ([a64e5de](https://github.com/wforney/helia/commit/a64e5de937fbbade035657a18e07bcad4de0a53f))
+* http blockbroker loads gateways from routing ([#519](https://github.com/wforney/helia/issues/519)) ([6a62d1c](https://github.com/wforney/helia/commit/6a62d1c8dcfadead0498d0bb59958837dc204c91))
+* ignore libp2p start param in helia factory ([#382](https://github.com/wforney/helia/issues/382)) ([c8d2fac](https://github.com/wforney/helia/commit/c8d2fac002ef73fc3eba83914de12d2e73074c64)), closes [#344](https://github.com/wforney/helia/issues/344)
+* listen on ip6 addresses ([#271](https://github.com/wforney/helia/issues/271)) ([7ef5e79](https://github.com/wforney/helia/commit/7ef5e79620f043522ff0dacc260af1fe83e5d77e))
+* remove delegated routing api client patch ([#632](https://github.com/wforney/helia/issues/632)) ([9de08ef](https://github.com/wforney/helia/commit/9de08ef9c1cbdb723f524672f67574bf1dbed937))
+* remove deprecated HeliaLibp2p interace ([#862](https://github.com/wforney/helia/issues/862)) ([061f3cd](https://github.com/wforney/helia/commit/061f3cdb6d47b2962617da2a3f83857000c58f80))
+* remove gossipsub from default libp2p services ([#401](https://github.com/wforney/helia/issues/401)) ([99c94f4](https://github.com/wforney/helia/commit/99c94f4b85c4ed826a6195207e3545cbbc87a6d1))
+* remove rust bootstrapper ([#523](https://github.com/wforney/helia/issues/523)) ([fa9bd4b](https://github.com/wforney/helia/commit/fa9bd4b53702f3ae71b76a46549535b63629d820))
+* remove trustless-gateway.link ([#301](https://github.com/wforney/helia/issues/301)) ([0343725](https://github.com/wforney/helia/commit/03437255213b14f5931aed91e8555d7fb7f92926))
+* remove webtransport from default transports ([#674](https://github.com/wforney/helia/issues/674)) ([1aa6c8d](https://github.com/wforney/helia/commit/1aa6c8d93edb779d2e5668081fb847314b2e2c79))
+* replace IPNI gateway with delegated routing client ([#297](https://github.com/wforney/helia/issues/297)) ([57d580d](https://github.com/wforney/helia/commit/57d580da26c5e28852cc9fe4d0d80adb36699ece))
+* respect routers config in helia constructor ([#652](https://github.com/wforney/helia/issues/652)) ([1b2934b](https://github.com/wforney/helia/commit/1b2934b313800fdb0c9684fe203f44471769eb17))
+* support reading identity cids ([#429](https://github.com/wforney/helia/issues/429)) ([98308f7](https://github.com/wforney/helia/commit/98308f77488b8196b2d18f78f05ecd2d37456834))
+* try circuit relay transport first ([#267](https://github.com/wforney/helia/issues/267)) ([d5e9c3c](https://github.com/wforney/helia/commit/d5e9c3c45c8dc3e63969105b785f6a836820a1f8))
+* update attempt to add helia to identify agent version ([#268](https://github.com/wforney/helia/issues/268)) ([6dc7d55](https://github.com/wforney/helia/commit/6dc7d55cd3099785417a7a2c99db755e856bd59a))
+* update circuit relay server args ([#561](https://github.com/wforney/helia/issues/561)) ([3577d3d](https://github.com/wforney/helia/commit/3577d3d106e255ff0d2a1d47a197f04632b903ec))
+* update ipns module to v9 and fix double verification of records ([#396](https://github.com/wforney/helia/issues/396)) ([f2853f8](https://github.com/wforney/helia/commit/f2853f8bd5bdcee8ab7a685355b0be47f29620e0))
+* update js-libp2p types ([#570](https://github.com/wforney/helia/issues/570)) ([b4877b5](https://github.com/wforney/helia/commit/b4877b5b768895684be90a26f4303ae65fc209e7))
+* update libp2p deps, send user agent with auto-tls ([#736](https://github.com/wforney/helia/issues/736)) ([c015793](https://github.com/wforney/helia/commit/c01579393ddd622352d0d0179c67adaf5ccc4c8f))
+* update project deps and docs ([77e34fc](https://github.com/wforney/helia/commit/77e34fc115cbfb82585fd954bcf389ecebf655bc))
+* update to libp2p@2.x.x ([#630](https://github.com/wforney/helia/issues/630)) ([ec8bf66](https://github.com/wforney/helia/commit/ec8bf66dd870b42d6e5ef2b41706102397e0d39a))
+* use @libp2p/config to load private key from keystore ([#714](https://github.com/wforney/helia/issues/714)) ([b4f9d4f](https://github.com/wforney/helia/commit/b4f9d4fc234cc66e9cdf444900e365b1c63b9920))
+* use libp2p provider routing field ([#889](https://github.com/wforney/helia/issues/889)) ([d4d97b8](https://github.com/wforney/helia/commit/d4d97b83f76be7e3b480052467408839f808e230))
+* use non-deprecated factory function to create delegated client ([#934](https://github.com/wforney/helia/issues/934)) ([20ba9cf](https://github.com/wforney/helia/commit/20ba9cf6256961d2b664af0e8f48b5e9d009d834))
+
+
+### Documentation
+
+* add spell checker to ci ([#743](https://github.com/wforney/helia/issues/743)) ([45ca6bc](https://github.com/wforney/helia/commit/45ca6bc70b1644028500101044595fa0e2199b07))
+* fix grammar - it's -&gt; its ([#565](https://github.com/wforney/helia/issues/565)) ([155e24d](https://github.com/wforney/helia/commit/155e24db8c06c33972895d702a656e0c2996f3d9))
+* update generated docs to include version in module names ([#296](https://github.com/wforney/helia/issues/296)) ([0776106](https://github.com/wforney/helia/commit/0776106710d6641ac82b446f7fde6c40d788a0b4))
+* update jsdocs ([e502d45](https://github.com/wforney/helia/commit/e502d45fe328580c3b4f1033a5893db95088d27c))
+
+
+### Dependencies
+
+* bump @chainsafe/libp2p-noise from 14.1.0 to 15.0.0 ([#393](https://github.com/wforney/helia/issues/393)) ([4943c5b](https://github.com/wforney/helia/commit/4943c5b7e8779bc326ee156b1d80152225189343))
+* bump @helia/delegated-routing-v1-http-api-client to 5.0.0 ([#866](https://github.com/wforney/helia/issues/866)) ([354db66](https://github.com/wforney/helia/commit/354db660fe7bd571308b2d3bfe52fc9361ea34b0))
+* bump @libp2p/identify from 1.0.21 to 2.0.0 ([#528](https://github.com/wforney/helia/issues/528)) ([9fa2427](https://github.com/wforney/helia/commit/9fa2427fece28a4b4dc0980ae65480ff002a2bc6))
+* bump aegir from 42.2.11 to 43.0.1 ([#552](https://github.com/wforney/helia/issues/552)) ([74ccc92](https://github.com/wforney/helia/commit/74ccc92793a6d0bb4bee714d9fe4fa4183aa4ee8))
+* bump aegir from 43.0.3 to 44.0.1 ([#569](https://github.com/wforney/helia/issues/569)) ([6952f05](https://github.com/wforney/helia/commit/6952f05357844e5aa3dffb2afaf261df06b9b7c1))
+* bump aegir from 44.1.4 to 45.0.1 ([#669](https://github.com/wforney/helia/issues/669)) ([e58e49c](https://github.com/wforney/helia/commit/e58e49c6aed8ea9d1e9851435a25e33fdbee3781))
+* bump cborg from 2.0.5 to 4.0.1 ([#260](https://github.com/wforney/helia/issues/260)) ([230b15b](https://github.com/wforney/helia/commit/230b15b7aa1c5403abdeed81710c7d6d0862f041))
+* bump ipns from 6.0.7 to 7.0.1 ([#266](https://github.com/wforney/helia/issues/266)) ([373a22c](https://github.com/wforney/helia/commit/373a22c342401f7ad8b85d5f082d66934eddaa70))
+* bump multiformats from 12.1.3 to 13.0.0 ([#354](https://github.com/wforney/helia/issues/354)) ([1d16bf8](https://github.com/wforney/helia/commit/1d16bf89acd10ac79baf53f0cbc5f92d0e9d8301))
+* bump the helia-deps group across 2 directories with 1 update ([#717](https://github.com/wforney/helia/issues/717)) ([1c8583c](https://github.com/wforney/helia/commit/1c8583c89bbf47bfbe10636a9e226aabb61e20da))
+* bump uint8arrays from 4.0.10 to 5.0.0 ([#339](https://github.com/wforney/helia/issues/339)) ([299bb09](https://github.com/wforney/helia/commit/299bb0942bbfae492db938c4ccad4e835bab2dbd))
+* **dev:** bump aegir from 40.0.13 to 41.0.0 ([#273](https://github.com/wforney/helia/issues/273)) ([9a9f637](https://github.com/wforney/helia/commit/9a9f63787223eff7eae3b72e59b79b11baa621ea))
+* **dev:** bump sinon from 15.2.0 to 16.0.0 ([#262](https://github.com/wforney/helia/issues/262)) ([fb3081a](https://github.com/wforney/helia/commit/fb3081adc3e6cfcb16ff0b11f340848b7568863b))
+* **dev:** bump sinon from 16.1.3 to 17.0.0 ([#288](https://github.com/wforney/helia/issues/288)) ([ecdb46e](https://github.com/wforney/helia/commit/ecdb46e0d40df86a59e58fcdfb701db6e36d36e6))
+* **dev:** bump sinon-ts from 1.0.2 to 2.0.0 ([#298](https://github.com/wforney/helia/issues/298)) ([dbbee17](https://github.com/wforney/helia/commit/dbbee17959c0a737f196c468eb06cc055bbc9711))
+* update @libp2p/circuit-relay-v2 to 3.x.x ([#661](https://github.com/wforney/helia/issues/661)) ([0238ed4](https://github.com/wforney/helia/commit/0238ed47a63a4f51f66010c50659e6f892b212b5))
+* update aegir to 47.x.x ([#804](https://github.com/wforney/helia/issues/804)) ([60fbbc2](https://github.com/wforney/helia/commit/60fbbc2eb08e023e2eac02ae0e89ed143d715084))
+* update all deps ([#792](https://github.com/wforney/helia/issues/792)) ([d43efc7](https://github.com/wforney/helia/commit/d43efc7bdfff34071a8e4e22e01f659fbac0b78e))
+* update delegated routing client to v6 ([#936](https://github.com/wforney/helia/issues/936)) ([ec26650](https://github.com/wforney/helia/commit/ec2665082163f3c87ff0f9d3b491295f5cdf49b0))
+* update kad-dht to 14.0.0 ([#648](https://github.com/wforney/helia/issues/648)) ([60d8c8a](https://github.com/wforney/helia/commit/60d8c8a9ff2104302d1c87bcf39258f1da33cd45))
+* update libp2p patch versions ([917a1bc](https://github.com/wforney/helia/commit/917a1bceb9e9b56428a15dc3377a963f06affd12))
+* updates to libp2p v1 ([#320](https://github.com/wforney/helia/issues/320)) ([635d7a2](https://github.com/wforney/helia/commit/635d7a2938111ccc53f8defbd9b8f8f8ea3e8e6a))
+## [7.0.0](https://github.com/wforney/helia/compare/helia-v6.0.21...helia-v7.0.0) (2026-03-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* use `Helia` interface instead of `HeliaLibp2p`
+* uses libp2p v3 and updated block/data stores
+* helia now uses libp2p@2.x.x
+* remove gossipsub from default libp2p services ([#401](https://github.com/wforney/helia/issues/401))
+* the `libp2p` property has been removed from the `Helia` interface in `@helia/interface` - it is still present on the return type of `createHelia` from the `helia` module
+* `helia.pin.add` and `helia.pin.rm` now return `AsyncGenerator<CID>`
+* The libp2p API has changed in a couple of places - please see the [upgrade guide](https://github.com/libp2p/js-libp2p/blob/main/doc/migrations/v0.46-v1.0.0.md)
+
+### Features
+
+* add @helia/http to monorepo ([#372](https://github.com/wforney/helia/issues/372)) ([76220cd](https://github.com/wforney/helia/commit/76220cd5adf45af7fa61fd0a1321de4722b744d6))
+* add auto-tls support ([#716](https://github.com/wforney/helia/issues/716)) ([e45e1de](https://github.com/wforney/helia/commit/e45e1dea40120b993f009f8fbb81a9737742196c))
+* add libp2p to @helia/http ([#826](https://github.com/wforney/helia/issues/826)) ([235e5c4](https://github.com/wforney/helia/commit/235e5c4093a51bda1e0331f9dd26754f601b582c))
+* add metrics property to helia interface ([#512](https://github.com/wforney/helia/issues/512)) ([f7f71bb](https://github.com/wforney/helia/commit/f7f71bb20ab0b4efbe802be5af1189e76153b826))
+* add WebRTC-Direct listener ([#741](https://github.com/wforney/helia/issues/741)) ([deb9165](https://github.com/wforney/helia/commit/deb9165efe92ce9590c400955c073625eb358bb6))
+* configurable block brokers ([#280](https://github.com/wforney/helia/issues/280)) ([0749cbf](https://github.com/wforney/helia/commit/0749cbf99745ea6ab4363f1b5d635634ca0ddcfa))
+* enable filtering in delegated routing client ([#651](https://github.com/wforney/helia/issues/651)) ([23ebae1](https://github.com/wforney/helia/commit/23ebae1072fbbda371ee1d68efb5ecd25d6e339e))
+* export default helia config ([#783](https://github.com/wforney/helia/issues/783)) ([ae67092](https://github.com/wforney/helia/commit/ae670928a7aeb023d7f3d6aa41bcf9f23a413cdf))
+* expose .dns property on @helia/interface ([#465](https://github.com/wforney/helia/issues/465)) ([8c9bb7d](https://github.com/wforney/helia/commit/8c9bb7d224a1b786cba1fba18bffe07001a3b95d))
+* GatewayBlockBroker prioritizes & tries all gateways ([#281](https://github.com/wforney/helia/issues/281)) ([9bad21b](https://github.com/wforney/helia/commit/9bad21bd59fe6d1ba4a137db5a46bd2ead5238c3))
+* iterable pinning ([#231](https://github.com/wforney/helia/issues/231)) ([c15c774](https://github.com/wforney/helia/commit/c15c7749294d3d4aea5aef70544d088250336798))
+* update to libp2p@v3 and latest data/block stores ([#856](https://github.com/wforney/helia/issues/856)) ([34d3ecd](https://github.com/wforney/helia/commit/34d3ecd76c8424387c57221000e226f08ccd1d1e))
+* use trustless-gateway.link by default ([#299](https://github.com/wforney/helia/issues/299)) ([bf11efa](https://github.com/wforney/helia/commit/bf11efa4875f3b8f844511d70122983fc46b4f88))
+
+
+### Bug Fixes
+
+* add a test for reading the peer id from the datastore ([#397](https://github.com/wforney/helia/issues/397)) ([4836d52](https://github.com/wforney/helia/commit/4836d52bf721bc0c3e5920ebd0a05186fb19c6c6))
+* add dag walker for json codec ([#247](https://github.com/wforney/helia/issues/247)) ([5c4b570](https://github.com/wforney/helia/commit/5c4b5709e6b98de5efc9bed388942e367f5874e7)), closes [#246](https://github.com/wforney/helia/issues/246)
+* add doc-check script and export types used by functions ([#637](https://github.com/wforney/helia/issues/637)) ([4f14996](https://github.com/wforney/helia/commit/4f14996a9b976f2b60f4c8fe52a4fd1632420749))
+* add sideEffects: false to package.json ([#485](https://github.com/wforney/helia/issues/485)) ([8c45267](https://github.com/wforney/helia/commit/8c45267a474ab10b2faadfebdab33cfe446e8c03))
+* add tls to default delegated routing filters ([#670](https://github.com/wforney/helia/issues/670)) ([aecac3d](https://github.com/wforney/helia/commit/aecac3d92cbd22a7331afee8e6f87ef31a9f7d95))
+* add va1 bootstrapper ([#649](https://github.com/wforney/helia/issues/649)) ([460853f](https://github.com/wforney/helia/commit/460853f915661c794e52299529bda41a893f7b5b))
+* allow routings to use helia components ([#900](https://github.com/wforney/helia/issues/900)) ([cc90a4d](https://github.com/wforney/helia/commit/cc90a4db91a44c0fedc2cb8a49da9b3349418815))
+* create @helia/block-brokers package ([#341](https://github.com/wforney/helia/issues/341)) ([#342](https://github.com/wforney/helia/issues/342)) ([2979147](https://github.com/wforney/helia/commit/297914756fa06dc0c28890a2654d1159d16689c2))
+* enforce maximum identity hash size ([#865](https://github.com/wforney/helia/issues/865)) ([d9051cd](https://github.com/wforney/helia/commit/d9051cdc2fd19ab7def32d195b5798b27d85a078)), closes [#846](https://github.com/wforney/helia/issues/846)
+* export libp2p service return type ([#263](https://github.com/wforney/helia/issues/263)) ([76769cf](https://github.com/wforney/helia/commit/76769cf33e06746f998b4f16b52d3e2a6a7a20a8))
+* helia init should extend base helia init ([#464](https://github.com/wforney/helia/issues/464)) ([a64e5de](https://github.com/wforney/helia/commit/a64e5de937fbbade035657a18e07bcad4de0a53f))
+* http blockbroker loads gateways from routing ([#519](https://github.com/wforney/helia/issues/519)) ([6a62d1c](https://github.com/wforney/helia/commit/6a62d1c8dcfadead0498d0bb59958837dc204c91))
+* ignore libp2p start param in helia factory ([#382](https://github.com/wforney/helia/issues/382)) ([c8d2fac](https://github.com/wforney/helia/commit/c8d2fac002ef73fc3eba83914de12d2e73074c64)), closes [#344](https://github.com/wforney/helia/issues/344)
+* listen on ip6 addresses ([#271](https://github.com/wforney/helia/issues/271)) ([7ef5e79](https://github.com/wforney/helia/commit/7ef5e79620f043522ff0dacc260af1fe83e5d77e))
+* remove delegated routing api client patch ([#632](https://github.com/wforney/helia/issues/632)) ([9de08ef](https://github.com/wforney/helia/commit/9de08ef9c1cbdb723f524672f67574bf1dbed937))
+* remove deprecated HeliaLibp2p interace ([#862](https://github.com/wforney/helia/issues/862)) ([061f3cd](https://github.com/wforney/helia/commit/061f3cdb6d47b2962617da2a3f83857000c58f80))
+* remove gossipsub from default libp2p services ([#401](https://github.com/wforney/helia/issues/401)) ([99c94f4](https://github.com/wforney/helia/commit/99c94f4b85c4ed826a6195207e3545cbbc87a6d1))
+* remove rust bootstrapper ([#523](https://github.com/wforney/helia/issues/523)) ([fa9bd4b](https://github.com/wforney/helia/commit/fa9bd4b53702f3ae71b76a46549535b63629d820))
+* remove trustless-gateway.link ([#301](https://github.com/wforney/helia/issues/301)) ([0343725](https://github.com/wforney/helia/commit/03437255213b14f5931aed91e8555d7fb7f92926))
+* remove webtransport from default transports ([#674](https://github.com/wforney/helia/issues/674)) ([1aa6c8d](https://github.com/wforney/helia/commit/1aa6c8d93edb779d2e5668081fb847314b2e2c79))
+* replace IPNI gateway with delegated routing client ([#297](https://github.com/wforney/helia/issues/297)) ([57d580d](https://github.com/wforney/helia/commit/57d580da26c5e28852cc9fe4d0d80adb36699ece))
+* respect routers config in helia constructor ([#652](https://github.com/wforney/helia/issues/652)) ([1b2934b](https://github.com/wforney/helia/commit/1b2934b313800fdb0c9684fe203f44471769eb17))
+* support reading identity cids ([#429](https://github.com/wforney/helia/issues/429)) ([98308f7](https://github.com/wforney/helia/commit/98308f77488b8196b2d18f78f05ecd2d37456834))
+* try circuit relay transport first ([#267](https://github.com/wforney/helia/issues/267)) ([d5e9c3c](https://github.com/wforney/helia/commit/d5e9c3c45c8dc3e63969105b785f6a836820a1f8))
+* update attempt to add helia to identify agent version ([#268](https://github.com/wforney/helia/issues/268)) ([6dc7d55](https://github.com/wforney/helia/commit/6dc7d55cd3099785417a7a2c99db755e856bd59a))
+* update circuit relay server args ([#561](https://github.com/wforney/helia/issues/561)) ([3577d3d](https://github.com/wforney/helia/commit/3577d3d106e255ff0d2a1d47a197f04632b903ec))
+* update ipns module to v9 and fix double verification of records ([#396](https://github.com/wforney/helia/issues/396)) ([f2853f8](https://github.com/wforney/helia/commit/f2853f8bd5bdcee8ab7a685355b0be47f29620e0))
+* update js-libp2p types ([#570](https://github.com/wforney/helia/issues/570)) ([b4877b5](https://github.com/wforney/helia/commit/b4877b5b768895684be90a26f4303ae65fc209e7))
+* update libp2p deps, send user agent with auto-tls ([#736](https://github.com/wforney/helia/issues/736)) ([c015793](https://github.com/wforney/helia/commit/c01579393ddd622352d0d0179c67adaf5ccc4c8f))
+* update project deps and docs ([77e34fc](https://github.com/wforney/helia/commit/77e34fc115cbfb82585fd954bcf389ecebf655bc))
+* update to libp2p@2.x.x ([#630](https://github.com/wforney/helia/issues/630)) ([ec8bf66](https://github.com/wforney/helia/commit/ec8bf66dd870b42d6e5ef2b41706102397e0d39a))
+* use @libp2p/config to load private key from keystore ([#714](https://github.com/wforney/helia/issues/714)) ([b4f9d4f](https://github.com/wforney/helia/commit/b4f9d4fc234cc66e9cdf444900e365b1c63b9920))
+* use libp2p provider routing field ([#889](https://github.com/wforney/helia/issues/889)) ([d4d97b8](https://github.com/wforney/helia/commit/d4d97b83f76be7e3b480052467408839f808e230))
+* use non-deprecated factory function to create delegated client ([#934](https://github.com/wforney/helia/issues/934)) ([20ba9cf](https://github.com/wforney/helia/commit/20ba9cf6256961d2b664af0e8f48b5e9d009d834))
+
+
+### Documentation
+
+* add spell checker to ci ([#743](https://github.com/wforney/helia/issues/743)) ([45ca6bc](https://github.com/wforney/helia/commit/45ca6bc70b1644028500101044595fa0e2199b07))
+* fix grammar - it's -&gt; its ([#565](https://github.com/wforney/helia/issues/565)) ([155e24d](https://github.com/wforney/helia/commit/155e24db8c06c33972895d702a656e0c2996f3d9))
+* update generated docs to include version in module names ([#296](https://github.com/wforney/helia/issues/296)) ([0776106](https://github.com/wforney/helia/commit/0776106710d6641ac82b446f7fde6c40d788a0b4))
+* update jsdocs ([e502d45](https://github.com/wforney/helia/commit/e502d45fe328580c3b4f1033a5893db95088d27c))
+
+
+### Dependencies
+
+* bump @chainsafe/libp2p-noise from 14.1.0 to 15.0.0 ([#393](https://github.com/wforney/helia/issues/393)) ([4943c5b](https://github.com/wforney/helia/commit/4943c5b7e8779bc326ee156b1d80152225189343))
+* bump @helia/delegated-routing-v1-http-api-client to 5.0.0 ([#866](https://github.com/wforney/helia/issues/866)) ([354db66](https://github.com/wforney/helia/commit/354db660fe7bd571308b2d3bfe52fc9361ea34b0))
+* bump @libp2p/identify from 1.0.21 to 2.0.0 ([#528](https://github.com/wforney/helia/issues/528)) ([9fa2427](https://github.com/wforney/helia/commit/9fa2427fece28a4b4dc0980ae65480ff002a2bc6))
+* bump aegir from 42.2.11 to 43.0.1 ([#552](https://github.com/wforney/helia/issues/552)) ([74ccc92](https://github.com/wforney/helia/commit/74ccc92793a6d0bb4bee714d9fe4fa4183aa4ee8))
+* bump aegir from 43.0.3 to 44.0.1 ([#569](https://github.com/wforney/helia/issues/569)) ([6952f05](https://github.com/wforney/helia/commit/6952f05357844e5aa3dffb2afaf261df06b9b7c1))
+* bump aegir from 44.1.4 to 45.0.1 ([#669](https://github.com/wforney/helia/issues/669)) ([e58e49c](https://github.com/wforney/helia/commit/e58e49c6aed8ea9d1e9851435a25e33fdbee3781))
+* bump cborg from 2.0.5 to 4.0.1 ([#260](https://github.com/wforney/helia/issues/260)) ([230b15b](https://github.com/wforney/helia/commit/230b15b7aa1c5403abdeed81710c7d6d0862f041))
+* bump ipns from 6.0.7 to 7.0.1 ([#266](https://github.com/wforney/helia/issues/266)) ([373a22c](https://github.com/wforney/helia/commit/373a22c342401f7ad8b85d5f082d66934eddaa70))
+* bump multiformats from 12.1.3 to 13.0.0 ([#354](https://github.com/wforney/helia/issues/354)) ([1d16bf8](https://github.com/wforney/helia/commit/1d16bf89acd10ac79baf53f0cbc5f92d0e9d8301))
+* bump the helia-deps group across 2 directories with 1 update ([#717](https://github.com/wforney/helia/issues/717)) ([1c8583c](https://github.com/wforney/helia/commit/1c8583c89bbf47bfbe10636a9e226aabb61e20da))
+* bump uint8arrays from 4.0.10 to 5.0.0 ([#339](https://github.com/wforney/helia/issues/339)) ([299bb09](https://github.com/wforney/helia/commit/299bb0942bbfae492db938c4ccad4e835bab2dbd))
+* **dev:** bump aegir from 40.0.13 to 41.0.0 ([#273](https://github.com/wforney/helia/issues/273)) ([9a9f637](https://github.com/wforney/helia/commit/9a9f63787223eff7eae3b72e59b79b11baa621ea))
+* **dev:** bump sinon from 15.2.0 to 16.0.0 ([#262](https://github.com/wforney/helia/issues/262)) ([fb3081a](https://github.com/wforney/helia/commit/fb3081adc3e6cfcb16ff0b11f340848b7568863b))
+* **dev:** bump sinon from 16.1.3 to 17.0.0 ([#288](https://github.com/wforney/helia/issues/288)) ([ecdb46e](https://github.com/wforney/helia/commit/ecdb46e0d40df86a59e58fcdfb701db6e36d36e6))
+* **dev:** bump sinon-ts from 1.0.2 to 2.0.0 ([#298](https://github.com/wforney/helia/issues/298)) ([dbbee17](https://github.com/wforney/helia/commit/dbbee17959c0a737f196c468eb06cc055bbc9711))
+* update @libp2p/circuit-relay-v2 to 3.x.x ([#661](https://github.com/wforney/helia/issues/661)) ([0238ed4](https://github.com/wforney/helia/commit/0238ed47a63a4f51f66010c50659e6f892b212b5))
+* update aegir to 47.x.x ([#804](https://github.com/wforney/helia/issues/804)) ([60fbbc2](https://github.com/wforney/helia/commit/60fbbc2eb08e023e2eac02ae0e89ed143d715084))
+* update all deps ([#792](https://github.com/wforney/helia/issues/792)) ([d43efc7](https://github.com/wforney/helia/commit/d43efc7bdfff34071a8e4e22e01f659fbac0b78e))
+* update delegated routing client to v6 ([#936](https://github.com/wforney/helia/issues/936)) ([ec26650](https://github.com/wforney/helia/commit/ec2665082163f3c87ff0f9d3b491295f5cdf49b0))
+* update kad-dht to 14.0.0 ([#648](https://github.com/wforney/helia/issues/648)) ([60d8c8a](https://github.com/wforney/helia/commit/60d8c8a9ff2104302d1c87bcf39258f1da33cd45))
+* update libp2p patch versions ([917a1bc](https://github.com/wforney/helia/commit/917a1bceb9e9b56428a15dc3377a963f06affd12))
+* updates to libp2p v1 ([#320](https://github.com/wforney/helia/issues/320)) ([635d7a2](https://github.com/wforney/helia/commit/635d7a2938111ccc53f8defbd9b8f8f8ea3e8e6a))
+
+
+### Refactors
+
+* use functions for block broker creation ([#286](https://github.com/wforney/helia/issues/286)) ([43932a5](https://github.com/wforney/helia/commit/43932a54036dafdf1265b034b30b12784fd22d82))
+
+
+### Refactors
+
+* use functions for block broker creation ([#286](https://github.com/wforney/helia/issues/286)) ([43932a5](https://github.com/wforney/helia/commit/43932a54036dafdf1265b034b30b12784fd22d82))
+
 ## [6.0.21](https://github.com/ipfs/helia/compare/helia-v6.0.20...helia-v6.0.21) (2026-03-06)
 
 
